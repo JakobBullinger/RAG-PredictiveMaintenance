@@ -28,7 +28,7 @@ vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 # retrieval
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold",
-    search_kwargs={"k": 5, "score_threshold": 0.5},
+    search_kwargs={"k": 5, "score_threshold": 0.5}, ###Score Threshold: I should fine tune
 )
 results = retriever.invoke("what is retrieval augmented generation?")
 

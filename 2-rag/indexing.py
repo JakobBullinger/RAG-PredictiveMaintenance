@@ -44,7 +44,10 @@ vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 
 # loading the PDF document
-loader = PyPDFDirectoryLoader("documents/")
+#loader = PyPDFDirectoryLoader("documents/")
+loader = PyPDFDirectoryLoader("2-rag/documents/")
+
+
 
 raw_documents = loader.load()
 
@@ -58,9 +61,10 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 # creating the chunks
 documents = text_splitter.split_documents(raw_documents)
+print(f"Loaded {len(raw_documents)} raw documents")
+print(f"Generated {len(documents)} chunks")
 
 # generate unique id's
-
 i = 0
 uuids = []
 
