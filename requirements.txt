@@ -1,5 +1,16 @@
+streamlit
+python-dotenv
+pinecone-client
+langchain-pinecone
+langchain-openai
+langchain-core
+langchain-community
+langchain-text-splitters
 pandas
 numpy
 matplotlib
 seaborn
+scikit-learn
+imbalanced-learn
+joblib
 
