@@ -31,8 +31,7 @@ vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-    st.session_state.messages.append(SystemMessage("You are an assistant for question-answering tasks. ")) ### I will adjuste this line
-
+    st.session_state.messages.append(SystemMessage("You are an assistant for question-answering tasks. "))
 # display chat messages from history on app rerun
 for message in st.session_state.messages:
     if isinstance(message, HumanMessage):
@@ -43,7 +42,7 @@ for message in st.session_state.messages:
             st.markdown(message.content)
 
 # create the bar where we can type messages
-prompt = st.chat_input("How are you?")
+prompt = st.chat_input("How can I help you?")
 
 # did the user submit a prompt?
 if prompt:
@@ -69,11 +68,11 @@ if prompt:
     docs = retriever.invoke(prompt)
     docs_text = "".join(d.page_content for d in docs)  ### combine all the documents
 
-    # creating the system prompt
+    # creating the system prompt - adjuste repsonse length
     system_prompt = """You are an assistant for question-answering tasks. 
     Use the following pieces of retrieved context to answer the question. 
     If you don't know the answer, just say that you don't know. 
-    Use three sentences maximum and keep the answer concise.
+    Use ten sentences maximum and keep the answer concise.
     Context: {context}:"""
 
     # Populate the system prompt with the retrieved context
