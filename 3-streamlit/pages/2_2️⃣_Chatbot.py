@@ -12,6 +12,7 @@ load_dotenv()
 
 st.set_page_config(
     page_title="Predictive Maintenance Chatbot")
+
 st.title("🤖 Predictive Maintenance Chatbot")
 
 # ── 1) Initialize Pinecone & Vector Store ───────────────────────────────────
