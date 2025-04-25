@@ -20,7 +20,7 @@ load_dotenv()
 pc = Pinecone(api_key=os.environ.get("PINECONE_API_KEY"))
 
 # initialize pinecone database
-index_name = os.environ.get("PINECONE_INDEX_NAME")  # change if desired
+index_name = os.environ.get("PINECONE_INDEX_NAME") 
 
 # check whether index exists, and create if not
 existing_indexes = [index_info["name"] for index_info in pc.list_indexes()]
@@ -44,7 +44,6 @@ vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 
 # loading the PDF document
-#loader = PyPDFDirectoryLoader("documents/")
 loader = PyPDFDirectoryLoader("2-rag/documents/")
 
 
@@ -53,8 +52,8 @@ raw_documents = loader.load()
 
 # splitting the document
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=800,
-    chunk_overlap=400,
+    chunk_size=1000,
+    chunk_overlap=200,
     length_function=len,
     is_separator_regex=False,
 )
