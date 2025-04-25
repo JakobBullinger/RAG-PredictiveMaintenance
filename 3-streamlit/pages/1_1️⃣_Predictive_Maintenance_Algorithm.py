@@ -6,11 +6,12 @@ import altair as alt
 
 
 
-st.set_page_config(page_title="Predictive Maintenance Algorithm")
+st.set_page_config(
+    page_title="Predictive Maintenance Algorithm"
+    )
 
 # Title & Description
-st.title("🔧 Predictive Maintenance Algorithm")
-st.markdown("---")
+st.title("🔧 Predictive Maintenance Algorithm")#
 st.write("")
 st.markdown("""
 Provide sensor data inputs manually or upload your CSV to predict machine failure modes
@@ -68,15 +69,13 @@ if st.button("🚀 Predict Failure Mode"):
     predicted_failure = [failure_types[p] for p in prediction]
 
     # Display ONLY the final failure result
-    st.write("")
-    st.write("")
     st.markdown("---")
     st.subheader("Prediction Results")
     
     if predicted_failure[0] == "No Failure":
         st.success("✅ Machine is operating normally. No imminent failures detected.")
     else:
-        st.write("")
+        # st.write("")
         st.error(f"⚠️ Predicted Failure: {predicted_failure[0]}")
 
         proba_df = pd.DataFrame(prediction_proba, columns=failure_types).T

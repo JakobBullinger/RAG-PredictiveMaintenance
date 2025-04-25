@@ -10,8 +10,7 @@ from langchain.chains import ConversationalRetrievalChain
 
 load_dotenv()
 
-st.set_page_config(
-    page_title="Predictive Maintenance Chatbot")
+st.set_page_config(page_title="Predictive Maintenance Chatbot")
 st.title("🤖 Predictive Maintenance Chatbot")
 
 # ── 1) Initialize Pinecone & Vector Store ───────────────────────────────────
@@ -32,18 +31,7 @@ if "messages" not in st.session_state:
         SystemMessage("You are an assistant specialized in predictive maintenance question-answering tasks.")
     ]
 
-# ── 3a) Inject any incoming “q” query-param as initial user message ───────────
-params = st.query_params
-if "q" in params and params["q"]:
-    initial = params["q"][0]
-    # only add it once
-    if not any(isinstance(m, HumanMessage) and m.content == initial 
-               for m in st.session_state.messages):
-        st.session_state.messages.append(HumanMessage(initial))
-    # clear params so we don’t re-inject on reload
-    st.query_params = {}
-
-# ── 3b) Display any existing messages ───────────────────────────────────────
+# Display any existing messages
 for msg in st.session_state.messages:
     if isinstance(msg, HumanMessage):
         with st.chat_message("user"):
