@@ -56,8 +56,8 @@ if __name__ == "__main__":
     # ── 4. Token-based splitting ───────────────────────────────────────────────
     tokenizer = tiktoken.get_encoding("cl100k_base")
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,            # 500 tokens per chunk
-        chunk_overlap=100,         # 100-token overlap
+        chunk_size=300,            # 500 tokens per chunk
+        chunk_overlap=50,         # 100-token overlap
         length_function=num_tokens,
         is_separator_regex=False,
     )
