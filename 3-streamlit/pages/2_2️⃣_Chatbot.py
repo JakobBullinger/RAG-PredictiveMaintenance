@@ -23,6 +23,7 @@ st.title("🤖 Predictive Maintenance Chatbot")
 #     api_key=os.environ["OPENAI_API_KEY"]
 # )
 # vector_store = PineconeVectorStore(index=index, embedding=embeddings)
+
 pc = Pinecone(
     api_key     = os.environ["PINECONE_API_KEY"],
     environment = os.environ["PINECONE_ENVIRONMENT"], 
