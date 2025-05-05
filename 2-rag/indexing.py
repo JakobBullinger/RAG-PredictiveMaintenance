@@ -2,7 +2,8 @@ import os
 import time
 from dotenv import load_dotenv
 
-from pinecone import Pinecone, ServerlessSpec
+import pinecone
+
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import PyPDFDirectoryLoader

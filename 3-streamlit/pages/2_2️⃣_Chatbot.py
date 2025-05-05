@@ -2,7 +2,8 @@ import os
 import streamlit as st
 from dotenv import load_dotenv
 
-from pinecone import Pinecone
+import pinecone
+
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
