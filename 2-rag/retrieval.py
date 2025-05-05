@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 # import pinecone
-import pinecone
+from pinecone import Pinecone, ServerlessSpec
 
 # import langchain
 from langchain_pinecone import PineconeVectorStore

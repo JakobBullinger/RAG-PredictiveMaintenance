@@ -2,8 +2,7 @@ import os
 import streamlit as st
 from dotenv import load_dotenv
 
-import pinecone
-
+from pinecone import Pinecone
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
@@ -17,13 +16,26 @@ st.set_page_config(
 st.title("🤖 Predictive Maintenance Chatbot")
 
 # ── 1) Initialize Pinecone & Vector Store ───────────────────────────────────
-pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+# pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+# index = pc.Index(os.environ["PINECONE_INDEX_NAME"])
+# embeddings = OpenAIEmbeddings(
+#     model="text-embedding-3-large",
+#     api_key=os.environ["OPENAI_API_KEY"]
+# )
+# vector_store = PineconeVectorStore(index=index, embedding=embeddings)
+pc = Pinecone(
+    api_key     = os.environ["PINECONE_API_KEY"],
+    environment = os.environ["PINECONE_ENVIRONMENT"],  # must match the `…svc.<env>.pinecone.io` part
+)
 index = pc.Index(os.environ["PINECONE_INDEX_NAME"])
+
+# 2) Wrap in LangChain
 embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-large",
-    api_key=os.environ["OPENAI_API_KEY"]
+    model   = "text-embedding-3-large",
+    api_key = os.environ["OPENAI_API_KEY"],
 )
 vector_store = PineconeVectorStore(index=index, embedding=embeddings)
+
 
 # ── 2) Initialize the LLM ───────────────────────────────────────────────────
 llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
