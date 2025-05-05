@@ -25,7 +25,7 @@ st.title("🤖 Predictive Maintenance Chatbot")
 # vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 pc = Pinecone(
     api_key     = os.environ["PINECONE_API_KEY"],
-    environment = os.environ["PINECONE_ENVIRONMENT"],  # must match the `…svc.<env>.pinecone.io` part
+    environment = os.environ["PINECONE_ENVIRONMENT"], 
 )
 index = pc.Index(os.environ["PINECONE_INDEX_NAME"])
 
