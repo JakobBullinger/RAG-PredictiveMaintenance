@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load latency data
 lat = pd.read_csv("eval/latency_raw.csv", header=None)[0]
 
 # Font and layout settings for thesis
