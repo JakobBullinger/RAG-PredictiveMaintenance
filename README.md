@@ -9,7 +9,7 @@ Combines a gradient-boosting fault-classifier with a Streamlit chatbot that retr
 
 ---
 
-## ✨ Features
+## Features
 | Layer | Highlights |
 |-------|------------|
 | **Algorithm (`1-algorithm/`)** | • Gradient-Boosting model trained on AI4I-2020<br>• Notebook shows EDA, class-imbalance handling (SMOTE), hyper-parameter search<br>• Pickled best model (`best_gradient_boosting_model.pkl`) ready for inference |
@@ -20,7 +20,7 @@ Combines a gradient-boosting fault-classifier with a Streamlit chatbot that retr
 
 ---
 
-## 🚀 Quick-start
+## Quick-start
 
 ### 1. Clone & set up environment
 ```bash
