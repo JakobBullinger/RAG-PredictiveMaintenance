@@ -15,14 +15,6 @@ st.set_page_config(
 
 st.title("🤖 Predictive Maintenance Chatbot")
 
-# ── 1) Initialize Pinecone & Vector Store ───────────────────────────────────
-# pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-# index = pc.Index(os.environ["PINECONE_INDEX_NAME"])
-# embeddings = OpenAIEmbeddings(
-#     model="text-embedding-3-large",
-#     api_key=os.environ["OPENAI_API_KEY"]
-# )
-# vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 pc = Pinecone(
     api_key     = os.environ["PINECONE_API_KEY"],
@@ -38,16 +30,16 @@ embeddings = OpenAIEmbeddings(
 vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 
-# ── 2) Initialize the LLM ───────────────────────────────────────────────────
+# 2) Initialize the LLM ─
 llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
 
-# ── 3) Chat history in session_state ────────────────────────────────────────
+# ── 3) Chat history in session_state 
 if "messages" not in st.session_state:
     st.session_state.messages = [
         SystemMessage("You are an assistant specialized in predictive maintenance question-answering tasks.")
     ]
 
-# ── 3a) Inject any incoming “q” query-param as initial user message ───────────
+# 3a) Inject any incoming query param
 params = st.query_params
 if "q" in params and params["q"]:
     initial = params["q"][0]
@@ -58,7 +50,7 @@ if "q" in params and params["q"]:
     # clear params so we don’t re-inject on reload
     st.query_params = {}
 
-# ── 3b) Display any existing messages ───────────────────────────────────────
+# 3b) Display any existing messages
 for msg in st.session_state.messages:
     if isinstance(msg, HumanMessage):
         with st.chat_message("user"):
@@ -67,7 +59,7 @@ for msg in st.session_state.messages:
         with st.chat_message("assistant"):
             st.markdown(msg.content)
 
-# ── 4) Handle new user input ─────────────────────────────────────────────────
+# 4) Handle new user input 
 prompt = st.chat_input("How can I help you?")
 
 if prompt:
@@ -85,7 +77,7 @@ if prompt:
         llm, retriever, return_source_documents=True
     )
 
-    # Convert session_state.messages into a [(q1,a1), (q2,a2), …] history
+    # Convert session_state.messages
     history = []
     qa = {}
     for m in st.session_state.messages:
@@ -112,7 +104,7 @@ if prompt:
         with st.chat_message("assistant"):
             st.markdown(answer)
 
-        # Display a numbered list of sources (filename + page)
+ 
         if sources:
             st.markdown("**Sources:**")
             for i, doc in enumerate(sources, start=1):

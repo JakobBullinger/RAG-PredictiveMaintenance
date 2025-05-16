@@ -51,12 +51,9 @@ if st.button("🚀 Predict Failure Mode"):
             "Tool_wear": [tool_wear]
         })
 
-    # Run prediction
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)
 
-    # Use the model's built-in classes directly for robustness
-    # failure_types = model.classes_
     failure_types = [
         "No Failure",
         "Tool Wear (TWF)",
@@ -68,14 +65,12 @@ if st.button("🚀 Predict Failure Mode"):
     # Map predictions to labels
     predicted_failure = [failure_types[p] for p in prediction]
 
-    # Display ONLY the final failure result
     st.markdown("---")
     st.subheader("Prediction Results")
     
     if predicted_failure[0] == "No Failure":
         st.success("✅ Machine is operating normally. No imminent failures detected.")
     else:
-        # st.write("")
         st.error(f"⚠️ Predicted Failure: {predicted_failure[0]}")
 
         proba_df = pd.DataFrame(prediction_proba, columns=failure_types).T

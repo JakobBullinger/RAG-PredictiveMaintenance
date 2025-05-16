@@ -1,7 +1,7 @@
 import pathlib
 import streamlit as st
 
-# ── Page config & styling ────────────────────────────────────────────────────
+# Page config & styling 
 st.set_page_config(page_title="Predictive Maintenance Dashboard", layout="wide")
 st.markdown(
     """
@@ -15,11 +15,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ── Paths ────────────────────────────────────────────────────────────────────
+# Paths
 HERE = pathlib.Path(__file__).parent
 IMG  = HERE / "assets" / "architecture.png"
 
-# ── 1) Hero Section ─────────────────────────────────────────────────────────
+# 1) Hero Section
 st.markdown("# Predictive Maintenance Dashboard")
 st.markdown(
     """
@@ -43,7 +43,7 @@ st.markdown(
 )
 st.write("---")
 
-# ── 2) System Architecture Diagram ───────────────────────────────────────────
+# 2) System Architecture Diagram
 col1, col2 = st.columns([2, 3])
 with col1:
     if IMG.exists():
@@ -71,7 +71,7 @@ with col2:
 
 st.write("---")
 
-# ── 3) Thesis Objectives ─────────────────────────────────────────────────────
+# 3) Thesis Objectives
 st.markdown("### Thesis Objectives")
 obj_cols = st.columns(3)
 titles = ["🔍 Integration", "🚧 Challenges", "💼 Implications"]

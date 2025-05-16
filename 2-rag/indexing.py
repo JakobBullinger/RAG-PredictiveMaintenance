@@ -17,7 +17,7 @@ def num_tokens(text: str) -> int:
 if __name__ == "__main__":
     load_dotenv()
 
-    # ── 1. Connect to Pinecone & ensure index exists ───────────────────────────
+    # 1. Connect to Pinecone
     try:
         pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
         index_name = os.environ["PINECONE_INDEX_NAME"]
@@ -41,30 +41,30 @@ if __name__ == "__main__":
         print(f"Failed to initialize Pinecone: {e}")
         raise SystemExit(e)
 
-    # ── 2. Set up embeddings + vector store ────────────────────────────────────
+    # 2. Set up embeddings + vector store
     embeddings = OpenAIEmbeddings(
         model="text-embedding-3-large",
         api_key=os.environ["OPENAI_API_KEY"]
     )
     vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
-    # ── 3. Load your PDFs ──────────────────────────────────────────────────────
+    # 3. Load your PDFs
     loader = PyPDFDirectoryLoader("2-rag/documents/")
     raw_documents = loader.load()
     print(f"Loaded {len(raw_documents)} raw document(s).")
 
-    # ── 4. Token-based splitting ───────────────────────────────────────────────
+    # 4. Token-based splitting
     tokenizer = tiktoken.get_encoding("cl100k_base")
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,            # 500 tokens per chunk
-        chunk_overlap=50,         # 100-token overlap
+        chunk_size=500,            # 500 tokens per chunk
+        chunk_overlap=100,         # 100-token overlap
         length_function=num_tokens,
         is_separator_regex=False,
     )
     documents = text_splitter.split_documents(raw_documents)
     print(f"Split into {len(documents)} chunks (≈500 tokens each).")
 
-    # ── 5. Generate IDs & add to Pinecone ─────────────────────────────────────
+    # 5. Generate IDs & add to Pinecone
     ids = [f"id{i+1}" for i in range(len(documents))]
     try:
         vector_store.add_documents(documents=documents, ids=ids)

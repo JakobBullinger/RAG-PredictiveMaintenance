@@ -1,7 +1,7 @@
 # RAG-PredictiveMaintenance
 
 **Retrieval-Augmented Generation (RAG) chatbot and predictive-maintenance prototype**  
-Combines a gradient-boosting fault-classifier with a Streamlit chatbot that retrieves maintenance documentation and generates step-by-step repair guidance—complete with source citations.
+Combines a gradient-boosting fault-classifier with a Streamlit chatbot that retrieves maintenance documentation and generates step-by-step repair guidance, completed with source citations.
 
 <p align="center">
   <img src="3-streamlit/assets/architecture.png" width="70%" alt="System Architecture">
